@@ -2980,13 +2980,24 @@ module.exports = exports = function (analytics) {
 };
 
 var Fornax = exports.Integration = integration('Fornax')
+<<<<<<< HEAD
   .option('cdn', '//s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js')
+||||||| merged common ancestors
+  .readyOnLoad()
+=======
+>>>>>>> Update Fornax and update compiled assets
   .global('fornax');
 
 Fornax.prototype.load = function (callback) {
   this.debug('loading library from ' + this.options.cdn);
   load(
+<<<<<<< HEAD
     this.options.cdn,
+||||||| merged common ancestors
+    'http://s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js',
+=======
+    '//s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js',
+>>>>>>> Update Fornax and update compiled assets
     callback
   );
 };
@@ -5985,7 +5996,6 @@ module.exports = function(e){
 
 });
 require.register("analytics/lib/index.js", function(exports, require, module){
-
 /**
  * Analytics.js
  *
@@ -5996,7 +6006,6 @@ var Analytics = require('./analytics');
 var createIntegration = require('integration');
 var each = require('each');
 var Integrations = require('integrations');
-
 
 /**
  * Expose the `analytics` singleton.
@@ -6025,6 +6034,15 @@ each(Integrations, function (name, Integration) {
   analytics.use(Integration);
 });
 
+/**
+ * Run through the queued function calls, and call them
+ */
+if (window.analytics && window.analytics instanceof Array) {
+    each(window.analytics, function(args) {
+        var method = args.shift();
+        analytics[method].apply(analytics, args);
+    });
+}
 });
 require.register("analytics/lib/analytics.js", function(exports, require, module){
 
