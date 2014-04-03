@@ -2981,16 +2981,22 @@ module.exports = exports = function (analytics) {
 
 var Fornax = exports.Integration = integration('Fornax')
 <<<<<<< HEAD
+<<<<<<< HEAD
   .option('cdn', '//s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js')
 ||||||| merged common ancestors
   .readyOnLoad()
 =======
 >>>>>>> Update Fornax and update compiled assets
+||||||| merged common ancestors
+=======
+  .option('cdn', '//s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js')
+>>>>>>> Update compiled assets
   .global('fornax');
 
 Fornax.prototype.load = function (callback) {
   this.debug('loading library from ' + this.options.cdn);
   load(
+<<<<<<< HEAD
 <<<<<<< HEAD
     this.options.cdn,
 ||||||| merged common ancestors
@@ -2998,6 +3004,11 @@ Fornax.prototype.load = function (callback) {
 =======
     '//s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js',
 >>>>>>> Update Fornax and update compiled assets
+||||||| merged common ancestors
+    '//s3-ap-southeast-2.amazonaws.com/leahcimic/public/fornax.min.js',
+=======
+    this.options.cdn,
+>>>>>>> Update compiled assets
     callback
   );
 };
