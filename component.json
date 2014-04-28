@@ -47,5 +47,8 @@
     "lib/store.js",
     "lib/user.js"
   ],
-  "main": "lib/index.js"
+  "main": "lib/index.js",
+  "remotes": [
+    "https://raw.githubusercontent.com"
+  ]
 }
