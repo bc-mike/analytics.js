@@ -230,7 +230,6 @@ module.exports = defaults;
 
 });
 require.register("component-type/index.js", function(exports, require, module){
-
 /**
  * toString ref.
  */
@@ -247,20 +246,19 @@ var toString = Object.prototype.toString;
 
 module.exports = function(val){
   switch (toString.call(val)) {
-    case '[object Function]': return 'function';
     case '[object Date]': return 'date';
     case '[object RegExp]': return 'regexp';
     case '[object Arguments]': return 'arguments';
     case '[object Array]': return 'array';
-    case '[object String]': return 'string';
+    case '[object Error]': return 'error';
   }
 
   if (val === null) return 'null';
   if (val === undefined) return 'undefined';
+  if (val !== val) return 'nan';
   if (val && val.nodeType === 1) return 'element';
-  if (val === Object(val)) return 'object';
 
-  return typeof val;
+  return typeof val.valueOf();
 };
 
 });
@@ -519,6 +517,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
+
 });
 require.register("component-emitter/index.js", function(exports, require, module){
 
@@ -1012,6 +1011,7 @@ module.exports = function(obj, fn){
     return fn.apply(obj, args.concat(slice.call(arguments)));
   }
 };
+
 
 });
 require.register("segmentio-bind-all/index.js", function(exports, require, module){
@@ -1531,6 +1531,7 @@ function createIntegration (name) {
   for (var key in protos) Integration.prototype[key] = protos[key];
   return Integration;
 }
+
 
 });
 require.register("segmentio-analytics.js-integration/lib/protos.js", function(exports, require, module){
@@ -2054,7 +2055,6 @@ function attach(el, fn){
   });
 }
 
-
 });
 require.register("segmentio-on-body/index.js", function(exports, require, module){
 var each = require('each');
@@ -2225,7 +2225,6 @@ module.exports = toUnixTimestamp;
 function toUnixTimestamp (date) {
   return Math.floor(date.getTime() / 1000);
 }
-
 });
 require.register("segmentio-use-https/index.js", function(exports, require, module){
 
@@ -2871,6 +2870,7 @@ function substitute(str, obj, expr){
   });
 }
 
+
 });
 require.register("segmentio-load-pixel/index.js", function(exports, require, module){
 
@@ -2926,6 +2926,7 @@ function error(fn, message, img){
     fn(err);
   };
 }
+
 
 });
 require.register("segmentio-replace-document-write/index.js", function(exports, require, module){
@@ -3209,6 +3210,7 @@ module.exports = function(parent) {
   return require;
 };
 
+
 });
 require.register("ianstormtaylor-to-camel-case/index.js", function(exports, require, module){
 
@@ -3261,6 +3263,7 @@ function toCapitalCase (string) {
     return previous + letter.toUpperCase();
   });
 }
+
 });
 require.register("ianstormtaylor-to-constant-case/index.js", function(exports, require, module){
 
@@ -3309,6 +3312,7 @@ module.exports = toDotCase;
 function toDotCase (string) {
   return toSpace(string).replace(/\s/g, '.');
 }
+
 });
 require.register("ianstormtaylor-to-no-case/index.js", function(exports, require, module){
 
@@ -3411,6 +3415,7 @@ function toPascalCase (string) {
     return letter.toUpperCase();
   });
 }
+
 });
 require.register("ianstormtaylor-to-sentence-case/index.js", function(exports, require, module){
 
@@ -3462,6 +3467,7 @@ module.exports = toSlugCase;
 function toSlugCase (string) {
   return toSpace(string).replace(/\s/g, '-');
 }
+
 });
 require.register("ianstormtaylor-to-snake-case/index.js", function(exports, require, module){
 var toSpace = require('to-space-case');
@@ -3485,6 +3491,7 @@ module.exports = toSnakeCase;
 function toSnakeCase (string) {
   return toSpace(string).replace(/\s/g, '_');
 }
+
 
 });
 require.register("ianstormtaylor-to-space-case/index.js", function(exports, require, module){
@@ -3512,6 +3519,7 @@ function toSpaceCase (string) {
     return match ? ' ' + match : '';
   });
 }
+
 });
 require.register("component-escape-regexp/index.js", function(exports, require, module){
 
@@ -3526,6 +3534,7 @@ require.register("component-escape-regexp/index.js", function(exports, require, 
 module.exports = function(str){
   return String(str).replace(/([.*+?=^!:${}()|[\]\/\\])/g, '\\$1');
 };
+
 });
 require.register("ianstormtaylor-map/index.js", function(exports, require, module){
 
@@ -3547,6 +3556,7 @@ module.exports = function map (obj, iterator) {
   });
   return arr;
 };
+
 });
 require.register("ianstormtaylor-title-case-minors/index.js", function(exports, require, module){
 
@@ -3592,6 +3602,7 @@ module.exports = [
   'without',
   'yet'
 ];
+
 });
 require.register("ianstormtaylor-to-title-case/index.js", function(exports, require, module){
 
@@ -3998,7 +4009,6 @@ Alias.prototype.action = function () {
 
 Alias.prototype.from = Facade.field('from');
 Alias.prototype.to = Facade.field('to');
-
 });
 require.register("segmentio-facade/lib/facade.js", function(exports, require, module){
 
@@ -4586,7 +4596,6 @@ Identify.prototype.phone = Facade.proxy('traits.phone');
 Identify.prototype.address = Facade.proxy('traits.address');
 Identify.prototype.avatar = Facade.proxy('traits.avatar');
 
-
 });
 require.register("segmentio-facade/lib/is-enabled.js", function(exports, require, module){
 
@@ -4896,6 +4905,7 @@ var matcher = /.+\@.+\..+/;
 function isEmail (string) {
   return matcher.test(string);
 }
+
 });
 require.register("segmentio-is-meta/index.js", function(exports, require, module){
 module.exports = function isMeta (e) {
@@ -5056,7 +5066,6 @@ function array (arr, strict) {
   });
   return arr;
 }
-
 
 });
 require.register("component-json-fallback/index.js", function(exports, require, module){
@@ -5844,7 +5853,6 @@ if ('undefined' == typeof window) {
   module.exports = require('./debug');
 }
 
-
 });
 require.register("visionmedia-debug/debug.js", function(exports, require, module){
 
@@ -6050,12 +6058,13 @@ each(Integrations, function (name, Integration) {
 /**
  * Run through the queued function calls, and call them
  */
-if (window.analytics && window.analytics instanceof Array) {
-    each(window.analytics, function(args) {
+if (window.bcanalytics && window.bcanalytics instanceof Array) {
+    each(window.bcanalytics, function(args) {
         var method = args.shift();
         analytics[method].apply(analytics, args);
     });
 }
+
 });
 require.register("analytics/lib/analytics.js", function(exports, require, module){
 
@@ -7832,5 +7841,5 @@ require.alias("analytics/lib/index.js", "analytics/index.js");if (typeof exports
 } else if (typeof define == "function" && define.amd) {
   define([], function(){ return require("analytics"); });
 } else {
-  this["analytics"] = require("analytics");
+  this["bcanalytics"] = require("analytics");
 }})();
